@@ -1,8 +1,16 @@
-import Link from "next/link";
+"use client";
+
+// React Libraries
 import React from "react";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+
+// Icons
 import { FcAlarmClock } from "react-icons/fc";
 import { BsSearch } from "react-icons/bs";
+
 const NavBar = () => {
+  const { status, data: session } = useSession();
   return (
     <nav className="p-5 flex justify-between">
       <div className="flex items-center space-x-1.5">
@@ -16,10 +24,25 @@ const NavBar = () => {
         <Link href="/">
           <BsSearch className="text-2xl" />
         </Link>
-        <button className="btn btn-accent btn-outline test-xsm">
-          {" "}
-          Login {" "}
-        </button>
+        {status === "authenticated" && session && (
+          <>
+            <span>{session.user!.name}</span>
+            <Link
+              href="/api/auth/signout"
+              className="btn btn-accent btn-outline test-xsm"
+            >
+              signout
+            </Link>
+          </>
+        )}
+        {status === "unauthenticated" && (
+          <Link
+            href="/api/auth/signin"
+            className="btn btn-accent btn-outline test-xsm"
+          >
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );
