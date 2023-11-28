@@ -26,7 +26,7 @@ Masjid Time is a web application built with Next.js, TypeScript, Prisma ORM, and
 ### Installation
 
 # Clone the repository
-git clone https://github.com/your-username/masjid-time.git
+git clone https://github.com/sohail-313/masjid-time.git
 
 # Navigate to the project directory
 cd masjid-time
